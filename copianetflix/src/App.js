@@ -12,20 +12,28 @@ export default () => {
   const [BlackHeader, setBlackHeader] = useState(false);
 
   useEffect(() => {
+    return (
+      <img src="https://c.tenor.com/NerN41mjgV0AAAAC/netflix-intro.gif" alt="Intro" />
+    );
+  }, [])
+
+  useEffect(() => {
     const loadAll = async () => {
       let list = await Tmdb.getHomeList();
       setMovieList(list);
 
-      let originals = list.filter(i=>i.slug === 'originals');
+      let originals = list.filter(i => i.slug === 'originals');
       let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1));
       let chosen = originals[0].items.results[randomChosen];
       let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeaturedData(chosenInfo);
     }
-    loadAll();
+    setTimeout(() => {
+      loadAll();
+    }, 3000)
   }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     const scrollListener = () => {
       if (window.scrollY > 10) {
         setBlackHeader(true);
@@ -39,12 +47,12 @@ export default () => {
     return () => {
       window.addEventListener('scroll', scrollListener);
     }
-  },[]);
+  }, []);
 
   return (
     <div className="Page">
 
-    <Header black={BlackHeader}/>
+      <Header black={BlackHeader} />
 
       {FeaturedData &&
         <FeaturedMovie item={FeaturedData} />
@@ -55,18 +63,21 @@ export default () => {
         ))}
       </section>
 
-          <footer>
-            Feito com <span role="img" aria-label="amor">❤️</span> por Thiago<br/>
-            Direitos de imagem para Netflix<br/>
-            Dados pegos do site Themobiedb.org
-          </footer>
+      <footer>
+        Feito com <span role="img" aria-label="amor">❤️</span> por Thiago<br />
+        Direitos de imagem para Netflix<br />
+        Dados pegos do site Themobiedb.org
+      </footer>
 
-          {movieList.length <= 0 && 
-
-          <div className="loading">
-            <img src="https://media.wired.com/photos/592744d3f3e2356fd800bf00/master/w_2560%2Cc_limit/Netflix_LoadTime.gif" alt="Carregando" />
-          </div>
-          }
+      {movieList.length <= 0 && introduction &&
+        <div className="loading">
+          <img src="https://media.wired.com/photos/592744d3f3e2356fd800bf00/master/w_2560%2Cc_limit/Netflix_LoadTime.gif" alt="Carregando" />
+        </div>
+        || movieList.length <= 0 && introduction == false &&
+        <div className="introduction">
+          <img src="https://c.tenor.com/NerN41mjgV0AAAAC/netflix-intro.gif" alt="Intro" />
+        </div>
+      }
     </div>
   );
 }

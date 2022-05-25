@@ -26,9 +26,14 @@
 }
 
 .featured--info {
+    display: flex;
     font-size: 18px;
     font-weight: bold;
     margin-top: 15px;
+}
+
+.featured--seasons {
+    margin-left: 15px;
 }
 
 .featured--points,
@@ -52,7 +57,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 }
 

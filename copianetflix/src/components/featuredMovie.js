@@ -9,11 +9,6 @@ export default ({ item }) => {
         genres.push(item.genres[i].name);
     }
 
-    let description = item.overview;
-    if (description.lenght > 200) {
-        // description = description.
-    }
-
     return (
         <div className="movieRow">
             <section className="featured" style={{
@@ -31,7 +26,7 @@ export default ({ item }) => {
                         </div>
                         <div className="featured--description">
                             <div className="featured--description--details">
-                                {description}
+                                {item.overview}
                             </div>
                         </div>
                         <div className="featured--buttons">
