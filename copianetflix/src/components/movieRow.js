@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import './movieRow.css';
+import PageMovie from './PageMovie.js';
+import {Route, Routes, Link, BrowserRouter} from 'react-router-dom';
 
 export default ({ title, items }) => {
     const [ScrollX, setScrollX] = useState(0);
@@ -53,4 +55,5 @@ export default ({ title, items }) => {
             </div>
         </div>
     );
+
 }
