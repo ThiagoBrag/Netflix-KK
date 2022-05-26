@@ -6,8 +6,6 @@ import FeaturedMovie from './components/featuredMovie';
 import Header from './components/Header';
 
 export default () => {
-
-  let introduction = false
   const [movieList, setMovieList] = useState([]);
   const [FeaturedData, setFeaturedData] = useState(null);
   const [BlackHeader, setBlackHeader] = useState(false);
@@ -29,10 +27,7 @@ export default () => {
       let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeaturedData(chosenInfo);
     }
-    setTimeout(() => {
-      introduction = true
-      loadAll();
-    }, 2550)
+    loadAll();
   }, []);
 
   useEffect(() => {
@@ -71,13 +66,9 @@ export default () => {
         Dados pegos do site Themobiedb.org
       </footer>
 
-      {movieList.length <= 0 && introduction == true &&
+      {movieList.length <= 0 &&
         <div className="loading">
           <img src="https://media.wired.com/photos/592744d3f3e2356fd800bf00/master/w_2560%2Cc_limit/Netflix_LoadTime.gif" alt="Carregando" />
-        </div>
-        || movieList.length <= 0 && introduction == false &&
-        <div className="introduction">
-          <img src="https://c.tenor.com/NerN41mjgV0AAAAC/netflix-intro.gif" alt="Intro" />
         </div>
       }
     </div>
